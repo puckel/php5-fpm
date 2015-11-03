@@ -120,7 +120,7 @@ service node["php_fpm"]["package"] do
         provider Chef::Provider::Service::Upstart
     end
     supports :start => true, :stop => true, :restart => true, :reload => true
-    action [ :enable, :start ]
+    action [ :enable ]
 end
 
 

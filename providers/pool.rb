@@ -340,40 +340,40 @@ def modify_file
         find_replace(file_name, "listen = ","#{ @current_resource.listen_socket }", "#{ @new_resource.listen_socket }")
     end
 
-    find_replace(file_name, "listen.allowed_clients = ",@current_resource.listen_allowed_clients, @new_resource.listen_allowed_clients)
-    find_replace(file_name, "listen.owner = ",@current_resource.listen_owner, @new_resource.listen_owner)
-    find_replace(file_name, "listen.group = ",@current_resource.listen_group, @new_resource.listen_group)
-    find_replace(file_name, "listen.mode = ",@current_resource.listen_mode, @new_resource.listen_mode)
-    find_replace(file_name, "listen.backlog = ",@current_resource.listen_backlog, @new_resource.listen_backlog)
+    @new_resource.listen_allowed_clients != nil ? find_replace(file_name, "listen.allowed_clients = ",@current_resource.listen_allowed_clients, @new_resource.listen_allowed_clients) : nil
+    @new_resource.listen_owner != nil ? find_replace(file_name, "listen.owner = ",@current_resource.listen_owner, @new_resource.listen_owner) : nil
+    @new_resource.listen_group != nil ? find_replace(file_name, "listen.group = ",@current_resource.listen_group, @new_resource.listen_group) : nil
+    @new_resource.listen_mode != nil ? find_replace(file_name, "listen.mode = ",@current_resource.listen_mode, @new_resource.listen_mode) : nil
+    @new_resource.listen_backlog != nil ? find_replace(file_name, "listen.backlog = ",@current_resource.listen_backlog, @new_resource.listen_backlog) : nil
 
     #Start PM configuration
-    find_replace(file_name, "pm = ",@current_resource.pm,@new_resource.pm)
-    find_replace(file_name, "pm.max_children = ",@current_resource.pm_max_children, @new_resource.pm_max_children)
-    find_replace(file_name, "pm.start_servers = ",@current_resource.pm_start_servers, @new_resource.pm_start_servers)
-    find_replace(file_name, "pm.min_spare_servers = ",@current_resource.pm_min_spare_servers, @new_resource.pm_min_spare_servers)
-    find_replace(file_name, "pm.max_spare_servers = ",@current_resource.pm_max_spare_servers, @new_resource.pm_max_spare_servers)
-    find_replace(file_name, "pm.process_idle_timeout = ",@current_resource.pm_process_idle_timeout, @new_resource.pm_process_idle_timeout)
-    find_replace(file_name, "pm.max_requests = ",@current_resource.pm_max_requests, @new_resource.pm_max_requests)
-    find_replace(file_name, "pm.status_path = ",@current_resource.pm_status_path, @new_resource.pm_status_path)
+    @new_resource.pm != nil ? find_replace(file_name, "pm = ",@current_resource.pm,@new_resource.pm) : nil
+    @new_resource.pm_max_children != nil ? find_replace(file_name, "pm.max_children = ",@current_resource.pm_max_children, @new_resource.pm_max_children) : nil
+    @new_resource.pm_start_servers != nil ? find_replace(file_name, "pm.start_servers = ",@current_resource.pm_start_servers, @new_resource.pm_start_servers) : nil
+    @new_resource.pm_min_spare_servers != nil ? find_replace(file_name, "pm.min_spare_servers = ",@current_resource.pm_min_spare_servers, @new_resource.pm_min_spare_servers) : nil
+    @new_resource.pm_max_spare_servers != nil ? find_replace(file_name, "pm.max_spare_servers = ",@current_resource.pm_max_spare_servers, @new_resource.pm_max_spare_servers) : nil
+    @new_resource.pm_process_idle_timeout != nil ? find_replace(file_name, "pm.process_idle_timeout = ",@current_resource.pm_process_idle_timeout, @new_resource.pm_process_idle_timeout) : nil
+    @new_resource.pm_max_requests != nil ? find_replace(file_name, "pm.max_requests = ",@current_resource.pm_max_requests, @new_resource.pm_max_requests) : nil
+    @new_resource.pm_status_path != nil ? find_replace(file_name, "pm.status_path = ",@current_resource.pm_status_path, @new_resource.pm_status_path) : nil
 
     #Start Ping
-    find_replace(file_name, "ping.path = ",@current_resource.ping_path, @new_resource.ping_path)
-    find_replace(file_name, "ping.response = ",@current_resource.ping_response, @new_resource.ping_response)
+    @new_resource.ping_path != nil ? find_replace(file_name, "ping.path = ",@current_resource.ping_path, @new_resource.ping_path) : nil
+    @new_resource.ping_response != nil ? find_replace(file_name, "ping.response = ",@current_resource.ping_response, @new_resource.ping_response) : nil
 
     #Start Logging
-    find_replace(file_name, "access.format = ",@current_resource.access_format, @new_resource.access_format.gsub("\\",""))
-    find_replace(file_name, "request_slowlog_timeout = ",@current_resource.request_slowlog_timeout, @new_resource.request_slowlog_timeout)
-    find_replace(file_name, "request_terminate_timeout = ",@current_resource.request_terminate_timeout, @new_resource.request_terminate_timeout)
-    find_replace(file_name, "access.log = ",@current_resource.access_log, @new_resource.access_log)
-    find_replace(file_name, "slowlog = ",@current_resource.slow_log, @new_resource.slow_log)
+    @new_resource.access_format != nil ? find_replace(file_name, "access.format = ",@current_resource.access_format, @new_resource.access_format.gsub("\\","")) : nil
+    @new_resource.request_slowlog_timeout != nil ? find_replace(file_name, "request_slowlog_timeout = ",@current_resource.request_slowlog_timeout, @new_resource.request_slowlog_timeout) : nil
+    @new_resource.request_terminate_timeout != nil ? find_replace(file_name, "request_terminate_timeout = ",@current_resource.request_terminate_timeout, @new_resource.request_terminate_timeout) : nil
+    @new_resource.access_log != nil ? find_replace(file_name, "access.log = ",@current_resource.access_log, @new_resource.access_log) : nil
+    @new_resource.slow_log != nil ? find_replace(file_name, "slowlog = ",@current_resource.slow_log, @new_resource.slow_log) : nil
 
     #Start Misc
-    find_replace(file_name, "chdir = ",@current_resource.chdir, @new_resource.chdir)
-    find_replace(file_name, "chroot = ",@current_resource.chroot, @new_resource.chroot)
-    find_replace(file_name, "catch_workers_output = ",@current_resource.catch_workers_output, @new_resource.catch_workers_output)
-    find_replace(file_name, "security.limit_extensions = ",@current_resource.security_limit_extensions, @new_resource.security_limit_extensions)
-    find_replace(file_name, "rlimit_files = ",@current_resource.rlimit_files, @new_resource.rlimit_files)
-    find_replace(file_name, "rlimit_core = ",@current_resource.rlimit_core, @new_resource.rlimit_core)
+    @new_resource.chdir != nil ? find_replace(file_name, "chdir = ",@current_resource.chdir, @new_resource.chdir) : nil
+    @new_resource.chroot != nil ? find_replace(file_name, "chroot = ",@current_resource.chroot, @new_resource.chroot) : nil
+    @new_resource.catch_workers_output != nil ? find_replace(file_name, "catch_workers_output = ",@current_resource.catch_workers_output, @new_resource.catch_workers_output) : nil
+    @new_resource.security_limit_extensions != nil ? find_replace(file_name, "security.limit_extensions = ",@current_resource.security_limit_extensions, @new_resource.security_limit_extensions) : nil
+    @new_resource.rlimit_files != nil ? find_replace(file_name, "rlimit_files = ",@current_resource.rlimit_files, @new_resource.rlimit_files) : nil
+    @new_resource.rlimit_core != nil ? find_replace(file_name, "rlimit_core = ",@current_resource.rlimit_core, @new_resource.rlimit_core) : nil
 
     #Start PHP INI Values
     if !@current_resource.php_ini_values.nil?
@@ -456,7 +456,15 @@ end
 def configuration_exists(conf_line,find_str)
 
     #Check that the configuration attribute exists
-    conf_line.include?(find_str)
+    conf_exists = conf_line.include?(find_str)
+    conf_value = false
+
+    #Ensure there is a value for the configuration line
+    if conf_exists && conf_line.split('=')[1].chomp.strip.length > 0
+      conf_value = true
+    end
+
+    return conf_value
 
 end
 
